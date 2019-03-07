@@ -6,6 +6,10 @@ pipeline {
         }
     }    
     stages {
+        
+            stage('SCM') {
+               git 'https://github.com/atomorojo/PetSitters.git'
+            }
           stage('Build') { 
           steps {
                 sh 'mvn -B -DskipTests clean package' 
@@ -20,15 +24,11 @@ pipeline {
                     junit 'target/surefire-reports/*.xml' 
                 }
             }
-             }
-                 stage('Deliver') { 
+          
+            stage('Deliver') { 
             steps {
                 sh './jenkins/scripts/deliver.sh' 
             }
-            }
-        node {
-            stage('SCM') {
-               git 'https://github.com/foo/bar.git'
             }
             stage('SonarQube analysis') {
                withSonarQubeEnv('My SonarQube Server') {
@@ -37,5 +37,5 @@ pipeline {
                  }
              }
         }
-    }
+    
 }
