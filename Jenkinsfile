@@ -22,12 +22,7 @@ pipeline {
 				sh 'mvn test'
 			}
          }
-			stage('Deliver') {
-				            steps {
-                sh './jenkins/scripts/deliver.sh' 
-        		    }
 
-			}
 			stage('SonarQube analysis') {
 				steps {
 					withSonarQubeEnv('My SonarQube Server') {
