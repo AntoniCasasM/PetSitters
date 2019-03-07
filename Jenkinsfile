@@ -21,10 +21,6 @@ pipeline {
 			steps {
 				sh 'mvn test'
 			}
-			post {
-					junit 'target/surefire-reports/*.xml'
-				
-			}
          }
 			stage('Deliver') {
 				steps {
