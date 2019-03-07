@@ -1,30 +1,37 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'maven:3-alpine' 
+            args '-v /root/.m2:/root/.m2' 
+        }
+    }    
     stages {
-        stage('SCM') {
+          stage('Build') { 
+          steps {
+                sh 'mvn -B -DskipTests clean package' 
+           }
+                  stage('Test') { 
             steps {
-                git url: 'https://github.com/atomorojo/PetSitters.git'
+                sh 'mvn test' 
             }
-        }
-        stage('build && SonarQube analysis') {
-            steps {
-                withSonarQubeEnv('My SonarQube Server') {
-                    // Optionally use a Maven environment you've configured already
-                    withMaven(maven:'Maven 3.5') {
-                        sh 'mvn clean package sonar:sonar'
-                    }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml' 
                 }
-            }
-        }
-        stage("Quality Gate") {
+                 stage('Deliver') { 
             steps {
-                timeout(time: 1, unit: 'HOURS') {
-                    // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
-                    // true = set pipeline to UNSTABLE, false = don't
-                    // Requires SonarQube Scanner for Jenkins 2.7+
-                    waitForQualityGate abortPipeline: true
-                }
+                sh './jenkins/scripts/deliver.sh' 
             }
+        node {
+            stage('SCM') {
+               git 'https://github.com/foo/bar.git'
+            }
+            stage('SonarQube analysis') {
+               withSonarQubeEnv('My SonarQube Server') {
+              // requires SonarQube Scanner for Maven 3.2+
+              sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
+                 }
+             }
         }
     }
 }
