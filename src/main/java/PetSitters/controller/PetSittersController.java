@@ -23,8 +23,8 @@ public class PetSittersController {
     @Autowired
     PetSittersService PSS;
 
-    @RequestMapping(value = "batch_process", method = RequestMethod.POST)
-    @ApiOperation(value = "Batch process request to upload required data for stakeholder recommendation.")
+    @RequestMapping(value = "Login", method = RequestMethod.POST)
+    @ApiOperation(value = "Login process.")
     public ResponseEntity addBatch(@RequestBody LoginSchema login) throws IOException {
         PSS.login(login);
         return new ResponseEntity(HttpStatus.OK);
