@@ -15,10 +15,6 @@
 	<name>PetSittersAPI</name>
 	<description>Demo project for Spring Boot</description>
 
-	<properties>
-		<java.version>10</java.version>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
