@@ -10,6 +10,7 @@
 	</parent>
 	<groupId>com.Petsitters</groupId>
 	<artifactId>PetSittersAPI</artifactId>
+	<packaging>jar</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>PetSittersAPI</name>
 	<description>Demo project for Spring Boot</description>
@@ -86,6 +87,7 @@
       				      <groupId>org.apache.maven.plugins</groupId>
           				  <artifactId>maven-compiler-plugin</artifactId>
          				   <version>3.7.0</version>
+					<release>10</release>
          				   <configuration>
        				     </configuration>
       			  </plugin>
