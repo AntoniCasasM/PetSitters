@@ -17,19 +17,13 @@ pipeline {
 				sh 'mvn -B -DskipTests clean package'
 			}
 		}
-		stage('Test') {
-			steps {
-				sh 'mvn test'
-			}
-         }
 
-			stage('SonarQube analysis') {
-				steps {
-					withSonarQubeEnv('My SonarQube Server') {
-						// requires SonarQube Scanner for Maven 3.2+
-						sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
-					}
-				}
-			}
-		}
+			
+	stage('Deliver') { 
+            steps {
+		 sh 'chmod 777 ./jenkins/release.sh'
+                sh './jenkins/release.sh' 
+            }
+	}
+	}
 }
