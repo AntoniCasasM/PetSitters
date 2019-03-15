@@ -1,6 +1,9 @@
 package PetSitters.controller;
 
+import PetSitters.entity.User;
 import PetSitters.schemas.LoginSchema;
+import PetSitters.schemas.LogoutSchema;
+import PetSitters.schemas.RegisterSchema;
 import PetSitters.service.PetSittersService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -23,10 +26,22 @@ public class PetSittersController {
     @Autowired
     PetSittersService PSS;
 
-    @RequestMapping(value = "Login", method = RequestMethod.POST)
+    @RequestMapping(value = "login", method = RequestMethod.POST)
     @ApiOperation(value = "Login process.")
-    public ResponseEntity addBatch(@RequestBody LoginSchema login) throws IOException {
-        PSS.login(login);
+    public ResponseEntity<User> login(@RequestBody LoginSchema login) throws IOException {
+        User us=PSS.login(login);
+        return new ResponseEntity(us,HttpStatus.OK);
+    }
+    @RequestMapping(value = "logout", method = RequestMethod.POST)
+    @ApiOperation(value = "Logout process.")
+    public ResponseEntity<User> logout(@RequestBody LogoutSchema logout) throws IOException {
+        PSS.logout(logout);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+    @RequestMapping(value = "register", method = RequestMethod.POST)
+    @ApiOperation(value = "Register process.")
+    public ResponseEntity<User> register(@RequestBody RegisterSchema register) throws IOException {
+        PSS.register(register);
         return new ResponseEntity(HttpStatus.OK);
     }
 
