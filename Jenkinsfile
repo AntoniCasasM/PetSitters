@@ -1,7 +1,7 @@
 pipeline {
 	agent {
 		docker {
-			image 'maven:3-alpine'
+			image 'paasmule/java-maven-git-alpine'
 			args '-v /root/.m2:/root/.m2'
 		}
 	}
