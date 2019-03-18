@@ -23,13 +23,15 @@ pipeline {
                 sh 'mvn test'
             }
         }
-        stage('SonarQube analysis') {
-            def scannerHome = tool 'SonarQube Scanner 2.8';
-            withSonarQubeEnv('Sonarqube') {
-              sh "${scannerHome}/bin/sonar-scanner"
-            }
-          }
+     stage('SonarQube analysis') {
+     steps{
+    withSonarQubeEnv('Sonarqube') {
+      // requires SonarQube Scanner for Maven 3.2+
+      sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
     }
+  }
+  }
+  }
 }
 
 
