@@ -6,11 +6,6 @@ pipeline {
 				git 'https://github.com/atomorojo/PetSitters.git'
 			}
 		}
-		stage('Build') {
-			steps {
-				sh 'mvn -B -DskipTests clean package'
-			}
-		}
 
 			
 	stage('Deliver') { 
