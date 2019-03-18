@@ -7,7 +7,7 @@ set -e
 echo "Checking if remote exists..."
 if ! git ls-remote heroku; then
   echo "Adding heroku remote..."
-  git remote add heroku git@heroku.com:PROJECT.git
+  git remote add heroku git@heroku.com:petshit.git
 fi
 
 # push only origin/master to heroku/master - will do nothing if
