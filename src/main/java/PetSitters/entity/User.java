@@ -1,18 +1,22 @@
 package PetSitters.entity;
 import org.springframework.data.annotation.Id;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
 public class User {
         @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         public String id;
 
-        public String firstName;
-        public String lastName;
+        public String username;
+        public String password;
 
         public User() {}
 
-        public User(String firstName, String lastName) {
-            this.firstName = firstName;
-            this.lastName = lastName;
+        public User(String username, String password) {
+            this.username = username;
+            this.password = password;
         }
 
     public String getId() {
@@ -23,28 +27,22 @@ public class User {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setUsername(String firstName) {
+        this.username = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getPassword() {
+        return password;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setPassword(String lastName) {
+        this.password = lastName;
     }
 
-    @Override
-        public String toString() {
-            return String.format(
-                    "User[id=%s, firstName='%s', lastName='%s']",
-                    id, firstName, lastName);
-        }
 
     }
 
